@@ -1,10 +1,15 @@
 <h3>Add task</h3>
-<form action="/node/tasks" method="post">
-    <label for="name">Enter name: </label>
-    <input id="name" type="text" name="name">
+<form action="/node/tasks" method="post" enctype="multipart/form-data">
 
-    <label for="status">Enter status: </label>
-    <input id="status" type="text" name="status">
+    <input type="text" name="name" placeholder="name">
+
+    <select name="status">
+        <% statuses.map((status) => { %>
+            <option value="<%= status %>"><%= status %></option>
+        <% }) %>
+    </select>
+
+    <input type="file" name="file">
 
     <input type="submit" value="OK">
 </form>

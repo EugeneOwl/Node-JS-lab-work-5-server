@@ -1,7 +1,7 @@
-const TASK_STATUS = {
-    TODO: 'TODO',
-    IN_PROGRESS: 'IN_PROGRESS',
-    DONE: 'DONE'
-};
+const TASK_STATUSES = [
+    'TODO',
+    'IN_PROGRESS',
+    'DONE'
+];
 
-export {TASK_STATUS}
+export {TASK_STATUSES}

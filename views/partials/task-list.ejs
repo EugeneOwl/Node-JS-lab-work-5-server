@@ -1,0 +1,9 @@
+<h3>Task list</h3>
+<table>
+    <% tasks.map((task) => { %>
+        <tr>
+            <td><%= task.name %></td>
+            <td><%= task.status %></td>
+        </tr>
+    <% }) %>
+</table>

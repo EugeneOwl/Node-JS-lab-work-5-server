@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/partials/add-task-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/partials/task-filter-form.css">
+    <link rel="stylesheet" type="text/css" href="/css/partials/task-list.css">
     <title>Node JS Task Api</title>
 </head>
 <body>
-    <%- include('partials/add-task-form') %>
-    <%- include('partials/task-filter-form') %>
-    <%- include('partials/task-list') %>
-
-    <!--<form action="/node/tasks/file" method="post" enctype="multipart/form-data">-->
-        <!--<input type="file" name="file">-->
-        <!--<input type="submit" value="upload">-->
-    <!--</form>-->
+    <div class="wrapper">
+        <%- include('partials/add-task-form') %>
+        <%- include('partials/task-filter-form') %>
+        <%- include('partials/task-list') %>
+    </div>
 </body>
 </html>

@@ -1,15 +1,17 @@
-<h3>Add task</h3>
-<form action="/node/tasks" method="post" enctype="multipart/form-data">
+<div class="add-task-form-wrapper">
+    <h3>Add task</h3>
+    <form action="/node/tasks" method="post" enctype="multipart/form-data">
 
-    <input type="text" name="name" placeholder="name">
+        <input type="text" name="name" placeholder="name">
 
-    <select name="status">
-        <% statuses.map((status) => { %>
-            <option value="<%= status %>"><%= status %></option>
-        <% }) %>
-    </select>
+        <select name="status">
+            <% statuses.map((status) => { %>
+                <option value="<%= status %>"><%= status %></option>
+            <% }) %>
+        </select>
 
-    <input type="file" name="file">
+        <input type="file" name="file">
 
-    <input type="submit" value="OK">
-</form>
+        <input type="submit" value="OK">
+    </form>
+</div>

@@ -11,7 +11,8 @@ const app = express();
 connectToDatabase();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs'); // TODO check up if delete
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/views'));
 app.use(fileUpload());
 app.use(BASE_URL, taskRouter);
 

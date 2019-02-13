@@ -3,20 +3,15 @@ import bodyParser from 'body-parser'
 import {baseRouter} from "./routes/base-router"
 import {connectToDatabase} from './database/connection'
 import {BASE_URL} from "./routes/routes"
+import {corsSettings} from "./services/security/server-cors";
 
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const app = express();
 
 connectToDatabase();
-app.use(require('cors')({
-    origin: function (origin, callback) {
-        callback(null, origin);
-    },
-    credentials: true
-}));
 app.use(cookieParser());
+app.use(corsSettings);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(BASE_URL, baseRouter);

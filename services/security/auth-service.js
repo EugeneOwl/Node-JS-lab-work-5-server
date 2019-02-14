@@ -1,6 +1,6 @@
 import {userService} from "../user-service";
 import {passwordService} from "./password-service";
-import {AUTH_LOGIN_NO_USER_FOUND_BY_USERNAME, AUTH_LOGIN_PASSWORD_INCORRECT} from "../../consts/messages";
+import {AUTH_LOGIN_NO_USER_FOUND_BY_USERNAME, AUTH_LOGIN_PASSWORD_INCORRECT} from "../../consts/messages-const";
 
 class AuthService {
 

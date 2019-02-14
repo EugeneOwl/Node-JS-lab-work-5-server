@@ -1,4 +1,4 @@
-import {FILES_UPLOAD_DIRECTORY} from "../consts/files";
+import {FILES_UPLOAD_DIRECTORY} from "../consts/files-const";
 import {randomString} from "./random-service";
 
 const multer = require('multer');

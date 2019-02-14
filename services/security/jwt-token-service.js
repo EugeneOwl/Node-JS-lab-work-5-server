@@ -27,8 +27,8 @@ class JwtTokenService {
         });
     }
 
-    verifyToken(token) {
-        return new Promise((resolve, reject) => {
+    async verifyToken(token) {
+        return await new Promise((resolve, reject) => {
             jwt.verify(token, JwtTokenService.JWT_SECRET, (err, decodedToken) => {
                 if (err || !decodedToken) {
                     return reject(err)

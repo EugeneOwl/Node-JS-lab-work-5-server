@@ -1,4 +1,4 @@
-import {Task} from "../models/task";
+import { Task } from "../models/task";
 
 class TaskRepository {
 
@@ -13,9 +13,9 @@ class TaskRepository {
 
     async getAllTasksBySearch(search) {
         try {
-            return await Task.find({status: {'$regex': search, '$options': 'i'}});
+            return await Task.find({ status: { '$regex': search, '$options': 'i' } });
         } catch (error) {
-            console.log(`Error when loading all tasks by search ${search} from database: `, error);
+            console.log(`Error when loading all tasks by search ${ search } from database: `, error);
             throw error;
         }
     }
@@ -24,7 +24,16 @@ class TaskRepository {
         try {
             return await task.save();
         } catch (error) {
-            console.log(`Error when saving task ${task} to database: `, error);
+            console.log(`Error when saving task ${ task } to database: `, error);
+            throw error;
+        }
+    }
+
+    async deleteTasks(identifiers) {
+        try {
+            return await Task.remove({ _id: { $in: identifiers } });
+        } catch (error) {
+            console.log(`Error when deleting tasks by identifiers ${ identifiers } to database: `, error);
             throw error;
         }
     }
@@ -32,4 +41,4 @@ class TaskRepository {
 
 const taskRepository = new TaskRepository();
 
-export {taskRepository}
+export { taskRepository }

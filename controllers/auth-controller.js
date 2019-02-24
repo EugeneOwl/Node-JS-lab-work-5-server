@@ -1,47 +1,24 @@
 import { authService } from '../services/security/auth-service'
 import { jwtTokenService } from "../services/security/jwt-token-service";
-import { JWT_TOKEN_KEY } from "../consts/json-keys";
-import { JWT_COOKIE_LIFETIME_MILLISECONDS } from "../consts/security-const";
-import { JsonWebTokenError } from "jsonwebtoken";
-import { NO_JWT_TOKEN_PROVIDED } from "../consts/messages-const";
-import { JWT_TOKEN_VALIDATION } from "../consts/logs-const";
+import { errorName } from "../consts/errors";
 
 class AuthController {
 
-    async login(request, response) {
-        const errorMessage = await authService.login(request.body.username, request.body.password);
-
-        if (errorMessage) {
-            response.status(401).send({ message: errorMessage });
-            return;
+    async login(args) {
+        const authorized = await authService.login(args.username, args.password);
+        if (!authorized) {
+            throw new Error(errorName.UNAUTHORIZED);
         }
-        response.cookie(
-            JWT_TOKEN_KEY,
-            jwtTokenService.createToken(),
-            {
-                maxAge: JWT_COOKIE_LIFETIME_MILLISECONDS,
-                httpOnly: true
-            }
-        ).send();
+        return { token: jwtTokenService.createToken() };
     }
 
-    async isAuthorized(request, response) {
-        const token = request.cookies[JWT_TOKEN_KEY];
-        console.log(JWT_TOKEN_VALIDATION, token);
+    async isAuthorized({ token }) {
         try {
             await jwtTokenService.verifyToken(token);
         } catch (e) {
-            if (e instanceof JsonWebTokenError) {
-                response.send(false);
-                return;
-            }
-            console.log(NO_JWT_TOKEN_PROVIDED, token);
+            return false;
         }
-        response.send(true);
-    }
-
-    logout(request, response) {
-        return response.cookie(JWT_TOKEN_KEY, '').send();
+        return true;
     }
 }
 

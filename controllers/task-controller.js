@@ -1,24 +1,25 @@
-import {taskService as service} from '../services/task-service'
+import { taskService as service } from '../services/task-service'
 
 class TaskController {
 
-    async showAllTasks(request, response) {
-        const tasks = await service.getAllTasks();
-        return response.send(tasks);
+    async getAllTasks({ filter }) {
+        if (filter) {
+            return await service.getAllTasksBySearch(filter);
+        }
+        return await service.getAllTasks();
     }
 
-    async searchTasks(request, response) {
-        const tasks = await service.getAllTasksBySearch(request.query['search']);
-        return response.send(tasks);
-    }
-
-    async addTask(request, response) {
+    async addTask(request, response) { // TODO rebuild!
         const filename = request.file ? request.file.filename : '';
         const savedTask = await service.addTask(request.body, filename);
         response.send(savedTask);
+    }
+
+    async deleteTasks({ identifiers }) {
+        await service.deleteTasks(identifiers);
     }
 }
 
 const taskController = new TaskController();
 
-export {taskController}
+export { taskController }

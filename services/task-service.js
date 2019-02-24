@@ -23,6 +23,10 @@ class TaskService {
         });
         return await repository.addTask(taskToSave);
     }
+
+    async deleteTasks(identifiers) {
+        await repository.deleteTasks(identifiers)
+    }
 }
 
 const taskService = new TaskService();
